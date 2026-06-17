@@ -264,10 +264,73 @@
             font-size: 0.8rem;
             color: #5c6370;
         }
+
+	/* Sticky Header Styles */
+        .sticky-header {
+            position: fixed;
+            top: -70px; /* Escondido por defecto arriba */
+            left: 0;
+            width: 100%;
+            background-color: rgba(30, 37, 48, 0.85); /* --card-bg con transparencia */
+            backdrop-filter: blur(8px); /* Efecto esmerilado moderno */
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid #2c323c;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 9999; /* Asegura que flote por encima de todo */
+            transition: top 0.3s ease-in-out; /* Animación suave de entrada/salida */
+            padding: 10px 20px;
+        }
+
+        /* Se activa mediante JavaScript */
+        .sticky-header.visible {
+            top: 0;
+        }
+
+        .sticky-content {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+        }
+
+        .sticky-title {
+            color: var(--text-bright);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .sticky-subtitle {
+            color: var(--accent);
+            font-size: 0.85rem;
+        }
+
+        /* Pequeño ajuste para pantallas móviles */
+        @media (max-width: 600px) {
+            .sticky-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+            }
+            .sticky-subtitle {
+                font-size: 0.75rem;
+            }
+        }
+
     </style>
 </head>
 <body>
 
+  <!-- Sticky Banner (Aparece al hacer scroll) -->
+  <div id="sticky-banner" class="sticky-header">
+    <div class="sticky-content">
+      <span class="sticky-title">Gerardo Cendejas Mendoza</span>
+      <span class="sticky-subtitle">Computational Biology PhD Student @ Cornell</span>
+    </div>
+  </div>
+  
     <div class="container">
         <header>
             <h1>Gerardo Cendejas Mendoza</h1>
@@ -480,6 +543,17 @@
             // Update mode line name dynamically for aesthetic completeness
             document.getElementById("mode-left").innerText = "-UUU:----F1  " + evt.currentTarget.innerText + "      All (0,0)   (Emacs-Style)";
         }
+
+      window.onscroll = function() {
+            var banner = document.getElementById("sticky-banner");
+            // Se activa cuando el usuario desliza hacia abajo más de 120 píxeles
+            if (document.body.scrollTop > 120 || document.documentElement.scrollTop > 120) {
+                banner.classList.add("visible");
+            } else {
+                banner.classList.remove("visible");
+            }
+      };
+      
     </script>
 </body>
 </html>
