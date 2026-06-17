@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerardo Cendejas Mendoza | Personal Website</title>
-    <!-- Google Fonts para el toque moderno/monoespaciado -->
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- PEGA AQUÍ TU CÓDIGO DE GOOGLE ANALYTICS (EL SCRIPT DE MEDICIÓN) -->
+    <!-- PASTE YOUR GOOGLE ANALYTICS CODE HERE -->
 
     <style>
         :root {
@@ -19,6 +20,7 @@
             --text-bright: #ffffff;
             --accent: #61afef;
             --accent-green: #98c379;
+            --accent-orange: #da8548;
             --border-radius: 14px;
             --font-sans: 'Plus Jakarta Sans', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
@@ -39,156 +41,219 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
         }
 
-        /* Encabezado Estilo Emacs Modernizado */
+        /* Top Header */
         header {
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #282c34;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
         }
 
         h1 {
             color: var(--text-bright);
             font-family: var(--font-mono);
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .subtitle {
             font-family: var(--font-mono);
             color: var(--accent);
-            font-size: 1rem;
-            margin-bottom: 12px;
+            font-size: 1.05rem;
+            margin-bottom: 15px;
         }
 
-        .contact-links {
+        /* Emacs Buffer Tabs Navigation */
+        .buffer-tabs {
             display: flex;
-            gap: 15px;
             flex-wrap: wrap;
+            gap: 6px;
+            background-color: #161b22;
+            padding: 6px 8px 0 8px;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            border: 1px solid #2c323c;
+            border-bottom: none;
             font-family: var(--font-mono);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
-        .contact-links a {
+        .tab {
+            padding: 8px 16px;
+            color: #5c6370;
+            background-color: #11151c;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-bottom: none;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .tab:hover {
             color: var(--text-main);
+            background-color: #1a202c;
+        }
+
+        .tab.active {
+            color: var(--accent);
+            background-color: var(--card-bg);
+            border-color: #2c323c;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .tab.active::before {
+            content: "* ";
+            color: var(--accent-orange);
+        }
+
+        /* Buffer Content Area */
+        .buffer-window {
+            background-color: var(--card-bg);
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            padding: 30px;
+            border: 1px solid #2c323c;
+            min-height: 400px;
+        }
+
+        .buffer-content {
+            display: none;
+        }
+
+        .buffer-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Emacs Mode Line Simulation at Bottom of Window */
+        .mode-line {
+            background-color: #21252b;
+            color: #bbc2cf;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            display: flex;
+            justify-content: space-between;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            margin-top: -1px;
+            border: 1px solid #2c323c;
+            border-top: none;
+        }
+
+        /* Content Styling */
+        h2 {
+            color: var(--text-bright);
+            font-family: var(--font-mono);
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            border-bottom: 1px dashed #3e4451;
+            padding-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        a {
+            color: var(--accent);
             text-decoration: none;
             transition: color 0.2s;
         }
 
-        .contact-links a:hover {
+        a:hover {
             color: var(--accent-green);
+            text-decoration: underline;
         }
 
-        /* Secciones principales */
-        section {
-            margin-bottom: 40px;
-        }
-
-        h2 {
-            color: var(--text-bright);
-            font-family: var(--font-mono);
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-
-        h2::before {
-            content: ">> ";
-            color: var(--accent-green);
-            margin-right: 8px;
-        }
-
-        /* Tarjetas Redondeadas Modernas */
         .card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid #2c323c;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            border-color: var(--accent);
+            border-left: 3px solid var(--accent);
+            background-color: #161b22;
+            padding: 15px 20px;
+            margin-bottom: 18px;
+            border-radius: 0 8px 8px 0;
         }
 
         .card-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-            gap: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            color: var(--accent-green);
         }
 
         .card-title {
             color: var(--text-bright);
             font-size: 1.1rem;
             font-weight: 600;
+            font-family: var(--font-sans);
         }
 
-        .card-meta {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--accent);
-        }
-
-        .card-institution {
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            color: var(--accent-green);
-            margin-bottom: 10px;
-        }
-
-        .card ul {
-            list-style-type: none;
-        }
-
-        .card li {
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 15px;
+        .card-sub {
+            font-style: italic;
             font-size: 0.95rem;
+            margin-bottom: 8px;
+            color: #a9a9a9;
         }
 
-        .card li::before {
-            content: "•";
-            color: var(--accent);
-            position: absolute;
-            left: 0;
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
         }
 
-        /* Lista de Habilidades / Tags redondeados */
-        .skills-grid {
+        li {
+            margin-bottom: 6px;
+        }
+
+        /* Software specific */
+        .badge-container {
+            margin-top: 8px;
             display: flex;
-            flex-wrap: wrap;
             gap: 10px;
         }
 
-        .skill-tag {
-            background-color: #282c34;
-            color: var(--text-bright);
+        /* Contact Section Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            background-color: #161b22;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
             font-family: var(--font-mono);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid #3e4451;
+            font-size: 0.9rem;
+        }
+
+        .contact-item i {
+            font-size: 1.2rem;
+            color: var(--accent-orange);
+            width: 24px;
+            text-align: center;
         }
 
         footer {
-            margin-top: 60px;
+            margin-top: 40px;
             text-align: center;
             font-family: var(--font-mono);
             font-size: 0.8rem;
             color: #5c6370;
-            border-top: 1px solid #282c34;
-            padding-top: 20px;
         }
     </style>
 </head>
@@ -198,84 +263,199 @@
         <header>
             <h1>Gerardo Cendejas Mendoza</h1>
             <div class="subtitle">Computational Biology PhD Student @ Cornell | Fulbright Scholar</div>
-            <div class="contact-links">
-                <a href="mailto:gerardocendejasmendoza@gmail.com">✉ Personal Email</a>
-                <a href="mailto:gerardo_cendejas_mendoza@ciencias.unam.mx">✉ Academic Email</a>
-                <a href="https://github.com/GerardoCendejas" target="_blank">🖧 GitHub</a>
-            </div>
         </header>
 
-        <section id="education">
-            <h2>Educación</h2>
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Licenciatura en Biología (B.S. in Biology)</div>
-                    <div class="card-meta">2020 - 2024</div>
-                </div>
-                <div class="card-institution">Universidad Nacional Autónoma de México</div>
-                <ul>
-                    <li>Graduado con un promedio de 9.86/10.00.</li>
-                </ul>
-            </div>
-        </section>
+        <!-- Buffer Selection Tabs -->
+        <div class="buffer-tabs">
+            <div class="tab active" onclick="openBuffer(event, 'main')">main.org</div>
+            <div class="tab" onclick="openBuffer(event, 'research')">current-research.md</div>
+            <div class="tab" onclick="openBuffer(event, 'cv')">experience.txt</div>
+            <div class="tab" onclick="openBuffer(event, 'software')">software.el</div>
+            <div class="tab" onclick="openBuffer(event, 'publications')">publications.bib</div>
+            <div class="tab" onclick="openBuffer(event, 'contact')">contact.cfg</div>
+        </div>
 
-        <section id="experience">
-            <h2>Experiencia en Investigación</h2>
+        <!-- Buffer Main Window -->
+        <div class="buffer-window">
             
-            <div class="card">
-                <div class="card-header">
+            <!-- MAIN BUFFER -->
+            <div id="main" class="buffer-content active">
+                <h2>About Me</h2>
+                <p>Gerardo is a PhD student in Computational Biology and a Fulbright Scholar. He completed his undergraduate degree in Biology at Universidad Nacional Autónoma de México (UNAM)[cite: 1]. He focuses on evolutionary biology and phylogenetics[cite: 1]. Currently, he studies the phylogenetic relationships of Darwin's finches and the hybridization dynamics between distinct populations and species across the Galápagos archipelago[cite: 1].</p>
+                <p>Deeply passionate about reproducible science and structural terminal agility, he orchestrates his entire research notes ecosystem (Zettelkasten), data parsing routines, and analytical pipelines directly within an organized <b>Emacs workflow</b>, ensuring a streamlined transition from raw genomics data to publishable insights.</p>
+            </div>
+
+            <!-- CURRENT RESEARCH BUFFER -->
+            <div id="research" class="buffer-content">
+                <h2>Current Research</h2>
+                <p>My doctoral research centers on exploring complex evolutionary patterns within the Galápagos archipelago. Specifically, I am investigating structural hybridization and genomic signatures among populations of Darwin's finches.</p>
+                <p>A key focus of my current work targets the <b>Large Cactus Finch (<i>Geospiza conirostris</i>) on Española Island</b>. By parsing Ancestral Recombination Graphs (ARGs) and resolving gene-flow profiles, I aim to clarify the evolutionary dynamics, historical network connections, and adaptive introgression events shaping these distinct island populations.</p>
+            </div>
+
+            <!-- EXPERIENCE / CV BUFFER -->
+            <div id="cv" class="buffer-content">
+                <h2>Education</h2>
+                <div class="card">
+                    <div class="card-header"><span>2024 - Present</span><span>Ithaca, NY, USA</span></div>
+                    <div class="card-title">Ph.D. student in Computational Biology</div>
+                    <div class="card-sub">Cornell University — <a href="https://erikenbody.github.io/" target="_blank">Enbody Lab <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75rem;"></i></a></div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><span>2020 - 2024</span><span>Mexico City, Mexico</span></div>
+                    <div class="card-title">B.S. in Biology</div>
+                    <div class="card-sub">Universidad Nacional Autónoma de México (UNAM)</div>
+                    <ul>
+                        <li>GPA: 9.86/10.00[cite: 1]</li>
+                    </ul>
+                </div>
+
+                <h2>Research Experience</h2>
+                <div class="card">
+                    <div class="card-header"><span>2022 - Present</span><span>Mexico City, Mexico</span></div>
+                    <div class="card-title">Bioinformatic Developer</div>
+                    <div class="card-sub">INMEGEN & XXI Century National Medical Center[cite: 1]</div>
+                    <ul>
+                        <li>Assembled a robust Snakemake pipeline to detect viral transcripts in human RNAseq datasets[cite: 1].</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header"><span>Jun 2024 - Jul 2024</span><span>Kansas City, MO, USA</span></div>
                     <div class="card-title">Summer Scholar</div>
-                    <div class="card-meta">Jun. 2024 - Jul. 2024</div>
+                    <div class="card-sub">Stowers Institute for Medical Research (Zeitlinger Lab)[cite: 1]</div>
+                    <ul>
+                        <li>Evaluated transcription factor binding and enhancer evolution using Deep Learning models and experimental setups (ATAC-seq, HCR-FISH)[cite: 1].</li>
+                    </ul>
                 </div>
-                <div class="card-institution">Stowers Institute for Medical Research (Zeitlinger Lab)</div>
-                <ul>
-                    <li>Evaluación de la evolución de enhancers entre 4 especies de <i>Drosophila</i> utilizando modelos de Deep Learning.</li>
-                    <li>Uso de técnicas experimentales avanzadas (ATAC-seq, qPCR, HCR-FISH y knockdown genético por RNAi).</li>
-                </ul>
+                <div class="card">
+                    <div class="card-header"><span>Jun 2023 - Aug 2023</span><span>Ontario, Canada</span></div>
+                    <div class="card-title">Research Assistant</div>
+                    <div class="card-sub">Western University (Grbic Lab)[cite: 1]</div>
+                    <ul>
+                        <li>Conducted Weighted Correlation Network Analysis (WGCNA) on RNAseq data for biomarker discovery[cite: 1].</li>
+                    </ul>
+                </div>
+
+                <h2>Work Experience</h2>
+                <div class="card">
+                    <div class="card-header"><span>Apr 2025 - May 2025</span><span>Mexico City, Mexico</span></div>
+                    <div class="card-title">Bioinformatics Consultant / Specialist</div>
+                    <div class="card-sub">Center for Research in Precision Medicine and Clinical Genomics – Genomics 360</div>
+                    <ul>
+                        <li>Provided specialized processing pipelines and analytical frameworks for large-scale clinical genomics datasets.</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Desarrollador Bioinformático</div>
-                    <div class="card-meta">2022 - Presente</div>
+            <!-- SOFTWARE BUFFER -->
+            <div id="software" class="buffer-content">
+                <h2>Software Development</h2>
+                <p>I actively write and maintain open-source extensions available on the official <b>MELPA</b> repository for the Emacs ecosystem:</p>
+                
+                <div class="card">
+                    <div class="card-header"><span>Emacs Package</span><span>MELPA</span></div>
+                    <div class="card-title"><a href="https://github.com/GerardoCendejas/org-roam-timeline" target="_blank">org-roam-timeline</a></div>
+                    <p style="margin-top: 5px; font-size: 0.9rem;">Provides a clean chronological visual timeline interface for notes managed inside Org-Roam environments.</p>
+                    <div class="badge-container">
+                        <img src="https://img.shields.io/melpa/dt/org-roam-timeline?color=61afef&style=flat-square" alt="MELPA downloads">
+                        <img src="https://img.shields.io/melpa/v/org-roam-timeline?color=98c379&style=flat-square" alt="MELPA version">
+                    </div>
                 </div>
-                <div class="card-institution">INMEGEN & Centro Médico Nacional Siglo XXI</div>
-                <ul>
-                    <li>Diseño y ensamblaje de un pipeline bioinformático estructurado en Snakemake para detectar virus y transcritos virales en muestras de RNAseq humanas.</li>
-                </ul>
+
+                <div class="card">
+                    <div class="card-header"><span>Emacs Package</span><span>MELPA</span></div>
+                    <div class="card-title"><a href="https://github.com/GerardoCendejas/ox-reveal-layouts" target="_blank">ox-reveal-layouts</a></div>
+                    <p style="margin-top: 5px; font-size: 0.9rem;">Advanced slide grid configurations and streamlined layout control export options for Org-Reveal presentations.</p>
+                    <div class="badge-container">
+                        <img src="https://img.shields.io/melpa/dt/ox-reveal-layouts?color=61afef&style=flat-square" alt="MELPA downloads">
+                        <img src="https://img.shields.io/melpa/v/ox-reveal-layouts?color=98c379&style=flat-square" alt="MELPA version">
+                    </div>
+                </div>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Investigación en Redes Genómicas</div>
-                    <div class="card-meta">Jun. 2023 - Ago. 2023</div>
+            <!-- PUBLICATIONS BUFFER -->
+            <div id="publications" class="buffer-content">
+                <h2>Publications</h2>
+                <div class="card">
+                    <div class="card-header"><span>Peer Reviewed</span><span>Frontiers in Genetics</span></div>
+                    <p style="color: var(--text-bright); font-size: 0.95rem; font-family: var(--font-mono);">
+                        Perezcano, C., Sánchez, A., Cendejas, G., Borrayo, F., Pérez-Coria, M., & Pérez-Hernández, G. (2026). Genetic distribution of selected obesity-related SNVs in the FTO, DRD2, MC4R, FABP2, ADRB2, and SH2B1 genes in a Mexico city population. <i>Frontiers in Genetics</i>, 17, 1784283.
+                    </p>
+                    <div style="margin-top: 12px; font-family: var(--font-mono); font-size: 0.85rem;">
+                        <a href="https://www.frontiersin.org/journals/genetics/articles/10.3389/fgene.2026.1784283/full" target="_blank"><i class="fa-solid fa-link"></i> Full Text</a> &nbsp;|&nbsp; 
+                        <span style="color: var(--accent-orange);">DOI: 10.3389/fgene.2026.1784283</span>
+                    </div>
                 </div>
-                <div class="card-institution">Western University, Canadá (Grbic Lab)</div>
-                <ul>
-                    <li>Análisis de redes de correlación ponderada (WGCNA) en datos de RNAseq para identificar biomarcadores de resistencia.</li>
-                    <li>Construcción de modelos de regresión lineal múltiple basados en datos de RT-qPCR.</li>
-                </ul>
             </div>
-        </section>
 
-        <section id="skills">
-            <h2>Habilidades Técnicas</h2>
-            <div class="skills-grid">
-                <div class="skill-tag">Python</div>
-                <div class="skill-tag">R</div>
-                <div class="skill-tag">Linux & Bash Scripting</div>
-                <div class="skill-tag">Snakemake</div>
-                <div class="skill-tag">RNAseq & WGCNA</div>
-                <div class="skill-tag">Deep Learning / Neural Networks</div>
-                <div class="skill-tag">Phylogenetic Inference</div>
-                <div class="skill-tag">Molecular Docking</div>
+            <!-- CONTACT BUFFER -->
+            <div id="contact" class="buffer-content">
+                <h2>Contact & Channels</h2>
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div>
+                            <span style="display:block; font-size:0.75rem; color:#5c6370;">Email</span>
+                            <a href="mailto:gc597@cornell.edu">gc597@cornell.edu</a>[cite: 1]
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-brands fa-linkedin"></i>
+                        <div>
+                            <span style="display:block; font-size:0.75rem; color:#5c6370;">LinkedIn</span>
+                            <a href="https://www.linkedin.com/in/gerardo-cendejas-mendoza-629726226" target="_blank">Profile</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <div>
+                            <span style="display:block; font-size:0.75rem; color:#5c6370;">Scholar</span>
+                            <a href="https://scholar.google.com/citations?user=TjSMlP8AAAAJ&hl=es&oi=sra" target="_blank">Google Scholar</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-brands fa-github"></i>
+                        <div>
+                            <span style="display:block; font-size:0.75rem; color:#5c6370;">GitHub</span>
+                            <a href="https://github.com/GerardoCendejas" target="_blank">@GerardoCendejas</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
+
+        </div>
+
+        <!-- Emacs Mode Line Simulation -->
+        <div class="mode-line">
+            <span id="mode-left">-UUU:----F1  *buffer*      All (0,0)   (Org Mode)</span>
+            <span>UTF-8</span>
+        </div>
 
         <footer>
-            <p>Hecho con estética minimalista Emacs. Propulsado por GitHub Pages.</p>
+            <p>M-x system-status: Operational. Hosted with GitHub Pages.</p>
         </footer>
     </div>
 
+    <!-- Script to toggle Buffers dynamically -->
+    <script>
+        function openBuffer(evt, bufferName) {
+            var i, bufferContent, tabLinks;
+            
+            bufferContent = document.getElementsByClassName("buffer-content");
+            for (i = 0; i < bufferContent.length; i++) {
+                bufferContent[i].classList.remove("active");
+            }
+
+            tabLinks = document.getElementsByClassName("tab");
+            for (i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].classList.remove("active");
+            }
+
+            document.getElementById(bufferName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+
+            // Update mode line name dynamically for aesthetic completeness
+            document.getElementById("mode-left").innerText = "-UUU:----F1  " + evt.currentTarget.innerText + "      All (0,0)   (Emacs-Style)";
+        }
+    </script>
 </body>
 </html>
